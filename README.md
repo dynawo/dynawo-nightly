@@ -16,7 +16,7 @@
 
 [https://github.com/dynawo/dynawo.git](https://github.com/dynawo/dynawo.git)
 
-This repository contains a tollchain to test Dyna&omega;o compilation with all available options.
+This repository contains a toolchain to test Dyna&omega;o compilation with all available options.
 
 ## Table of Contents
 
