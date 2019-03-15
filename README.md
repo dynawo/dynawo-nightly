@@ -12,6 +12,8 @@
 -->
 # Dyna&omega;o - An hybrid C++/Modelica time-domain simulation tool for power systems
 
+[![Build Status](https://travis-ci.com/dynawo/dynawo-nightly.svg?branch=master)](https://travis-ci.com/dynawo/dynawo-nightly)
+
 [http://dynawo.org](http://dynawo.org)
 
 [https://github.com/dynawo/dynawo.git](https://github.com/dynawo/dynawo.git)
