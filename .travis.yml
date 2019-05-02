@@ -56,7 +56,7 @@ install:
   - docker exec dynawo_travis_container bash -c "$LOG_COMMAND"
   - COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh build-3rd-party-version;RETURN_CODE=\$?;if [ \${RETURN_CODE} -ne 0 ]; then exit \${RETURN_CODE}; fi;util/envDynawo.sh build-dynawo;")
   - echo $COMMAND
-  - NRT_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh nrt;")
+  - NRT_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh nrt;RETURN_CODE=\$?;if [ \${RETURN_CODE} -ne 0 ]; then exit \${RETURN_CODE}; fi;")
   - echo $NRT_COMMAND
 
 jobs:
