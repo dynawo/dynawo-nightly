@@ -56,7 +56,7 @@ install:
   - docker exec dynawo_travis_container bash -c "$LOG_COMMAND"
   - COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh build-3rd-party-version;RETURN_CODE=\$?;if [ \${RETURN_CODE} -ne 0 ]; then exit \${RETURN_CODE}; fi;util/envDynawo.sh build-dynawo;")
   - echo $COMMAND
-  - NRT_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh nrt;RETURN_CODE=\$?;if [ \${RETURN_CODE} -ne 0 ]; then exit \${RETURN_CODE}; fi;")
+  - NRT_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh nrt;")
   - echo $NRT_COMMAND
 
 jobs:
@@ -66,110 +66,94 @@ jobs:
       env: BUILD_TYPE=Release CXX11_ENABLED=NO COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: g++
       env: BUILD_TYPE=Release CXX11_ENABLED=YES COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: g++
       env: BUILD_TYPE=Debug CXX11_ENABLED=NO COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: g++
       env: BUILD_TYPE=Debug CXX11_ENABLED=YES COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: g++
       env: BUILD_TYPE=Release CXX11_ENABLED=NO COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: g++
       env: BUILD_TYPE=Release CXX11_ENABLED=YES COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: g++
       env: BUILD_TYPE=Debug CXX11_ENABLED=NO COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: g++
       env: BUILD_TYPE=Debug CXX11_ENABLED=YES COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: clang++
       env: BUILD_TYPE=Release CXX11_ENABLED=NO COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: clang++
       env: BUILD_TYPE=Release CXX11_ENABLED=YES COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: clang++
       env: BUILD_TYPE=Debug CXX11_ENABLED=NO COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: clang++
       env: BUILD_TYPE=Debug CXX11_ENABLED=YES COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: clang++
       env: BUILD_TYPE=Release CXX11_ENABLED=NO COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: clang++
       env: BUILD_TYPE=Release CXX11_ENABLED=YES COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: clang++
       env: BUILD_TYPE=Debug CXX11_ENABLED=NO COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
     - stage: build
       compiler: clang++
       env: BUILD_TYPE=Debug CXX11_ENABLED=YES COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
       script:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-      after_success:
         - docker exec $dynawo_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
