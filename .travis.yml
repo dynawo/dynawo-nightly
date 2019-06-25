@@ -60,7 +60,7 @@ install:
   - echo $COMMAND
   - NRT_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh nrt;")
   - echo $NRT_COMMAND
-  - BUILD_OMC_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh build-omcDynawo;")
+  - BUILD_OMC_COMMAND=$(echo -n "cd dynawo;export DYNAWO_SRC_OPENMODELICA=$DYNAWO_SRC_OPENMODELICA_LOCAL; export DYNAWO_INSTALL_OPENMODELICA=$DYNAWO_INSTALL_OPENMODELICA_LOCAL; util/envDynawo.sh build-omcDynawo;")
   - echo $BUILD_OMC_COMMAND
 
 jobs:
