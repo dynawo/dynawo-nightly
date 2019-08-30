@@ -24,41 +24,9 @@ notifications:
     on_success: never
     on_failure: always
 
-env:
-  global:
-    - DYNAWO_HOME=/home/dynawo_travis/dynawo;
-    - DYNAWO_INSTALL_OPENMODELICA=/opt/OpenModelica/Install
-    - DYNAWO_SRC_OPENMODELICA=/opt/OpenModelica/Source
-    - DYNAWO_INSTALL_OPENMODELICA_LOCAL=/home/dynawo_travis/dynawo/OpenModelica/Install
-    - DYNAWO_SRC_OPENMODELICA_LOCAL=/home/dynawo_travis/dynawo/OpenModelica/Source
-    - DYNAWO_NB_PROCESSORS_USED=$(grep -c \^processor /proc/cpuinfo)
-    - DYNAWO_RESULTS_SHOW="false"
-    - DYNAWO_ADEPT_DOWNLOAD_URL=http://localhost:8080
-    - DYNAWO_SUNDIALS_DOWNLOAD_URL=http://localhost:8080
-    - DYNAWO_SUITE_SPARSE_DOWNLOAD_URL=http://localhost:8080
-    - DYNAWO_JQUERY_DOWNLOAD_URL=http://localhost:8080
-    - DYNAWO_FLOT_DOWNLOAD_URL=http://localhost:8080
-    - DYNAWO_CPPLINT_DOWNLOAD_URL=http://localhost:8080
-    - DYNAWO_XERCESC_DOWNLOAD_URL=http://localhost:8080
-    - dynawo_om_env=$(echo -n "-e DYNAWO_INSTALL_OPENMODELICA -e DYNAWO_SRC_OPENMODELICA")
-    - dynawo_om_env_local=$(echo -n "-e DYNAWO_INSTALL_OPENMODELICA_LOCAL -e DYNAWO_SRC_OPENMODELICA_LOCAL")
-    - dynawo_env=$(echo -n "-e DYNAWO_HOME -e DYNAWO_NB_PROCESSORS_USED -e DYNAWO_RESULTS_SHOW -e DYNAWO_BUILD_TYPE -e DYNAWO_CXX11_ENABLED -e DYNAWO_COMPILER -e DYNAWO_LIBRARY_TYPE")
-    - dynawo_env_url=$(echo -n "-e DYNAWO_ADEPT_DOWNLOAD_URL -e DYNAWO_SUNDIALS_DOWNLOAD_URL -e DYNAWO_SUITE_SPARSE_DOWNLOAD_URL -e DYNAWO_JQUERY_DOWNLOAD_URL -e DYNAWO_FLOT_DOWNLOAD_URL -e DYNAWO_CPPLINT_DOWNLOAD_URL -e DYNAWO_XERCESC_DOWNLOAD_URL")
-
 install:
-  - docker pull dynawo/dynawo-travis
-  - docker run -itd -u dynawo_travis --name dynawo_travis_container dynawo/dynawo-travis-nightly
-  - GIT_COMMAND="git clone --depth=1 https://github.com/dynawo/dynawo.git dynawo"
-  - docker exec dynawo_travis_container bash -c "$GIT_COMMAND"
-  - docker exec dynawo_travis_container bash -c "cd /opt;nohup python -m SimpleHTTPServer 8080 &> /dev/null &"
-  - LOG_COMMAND="cd dynawo;git log -1 --decorate"
-  - docker exec dynawo_travis_container bash -c "$LOG_COMMAND"
-  - COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh build-3rd-party-version;RETURN_CODE=\$?;if [ \${RETURN_CODE} -ne 0 ]; then exit \${RETURN_CODE}; fi;util/envDynawo.sh build-dynawo;")
-  - echo $COMMAND
-  - NRT_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh nrt;")
-  - echo $NRT_COMMAND
-  - BUILD_OMC_COMMAND=$(echo -n "cd dynawo;export DYNAWO_SRC_OPENMODELICA=$DYNAWO_SRC_OPENMODELICA_LOCAL; export DYNAWO_INSTALL_OPENMODELICA=$DYNAWO_INSTALL_OPENMODELICA_LOCAL; util/envDynawo.sh build-omcDynawo;")
-  - echo $BUILD_OMC_COMMAND
+  - source define_variables.sh
+  - ./install_stage.sh
 
 jobs:
   include:
@@ -69,8 +37,7 @@ jobs:
       DYNAWO_COMPILER: g++
       env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -78,8 +45,7 @@ jobs:
       DYNAWO_COMPILER: g++
       env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -87,8 +53,7 @@ jobs:
       DYNAWO_COMPILER: g++
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -96,8 +61,7 @@ jobs:
       DYNAWO_COMPILER: g++
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -105,8 +69,7 @@ jobs:
       DYNAWO_COMPILER: g++
       env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -114,8 +77,7 @@ jobs:
       DYNAWO_COMPILER: g++
       env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -123,8 +85,7 @@ jobs:
       DYNAWO_COMPILER: g++
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -132,8 +93,7 @@ jobs:
       DYNAWO_COMPILER: g++
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -141,8 +101,7 @@ jobs:
       DYNAWO_COMPILER: clang++
       env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -150,8 +109,7 @@ jobs:
       DYNAWO_COMPILER: clang++
       env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -159,8 +117,7 @@ jobs:
       DYNAWO_COMPILER: clang++
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -168,8 +125,7 @@ jobs:
       DYNAWO_COMPILER: clang++
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -177,8 +133,7 @@ jobs:
       DYNAWO_COMPILER: clang++
       env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -186,8 +141,7 @@ jobs:
       DYNAWO_COMPILER: clang++
       env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -195,8 +149,7 @@ jobs:
       DYNAWO_COMPILER: clang++
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -204,8 +157,7 @@ jobs:
       DYNAWO_COMPILER: clang++
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
       script:
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
-        - docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+        - ./build_stage.sh
     - stage: build
       os: linux
       dist: trusty
@@ -218,39 +170,27 @@ jobs:
       os: osx
       osx_image: xcode10.3
       DYNAWO_COMPILER: clang++
-      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED DYNAWO_INSTALL_OPENMODELICA=/opt/Dynawo_MacOS_latest/OpenModelica
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
-        - (cd /opt && curl -L $(curl -s -L -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4) -o Dynawo_MacOS_latest.zip)
-        - unzip /opt/Dynawo_MacOS_latest.zip -d /opt/Dynawo_MacOS_latest
-        - util/envDynawo.sh build-3rd-party-version
-        - util/envDynawo.sh build-dynawo
+        - ./build_stage.sh
     - stage: build
       os: osx
       osx_image: xcode10.3
       DYNAWO_COMPILER: clang++
-      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED DYNAWO_INSTALL_OPENMODELICA=/opt/Dynawo_MacOS_latest/OpenModelica
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
-        - (cd /opt && curl -L $(curl -s -L -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4) -o Dynawo_MacOS_latest.zip)
-        - unzip /opt/Dynawo_MacOS_latest.zip -d /opt/Dynawo_MacOS_latest
-        - util/envDynawo.sh build-3rd-party-version
-        - util/envDynawo.sh build-dynawo
+        - ./build_stage.sh
     - stage: build
       os: osx
       osx_image: xcode10.3
       DYNAWO_COMPILER: clang++
-      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC DYNAWO_INSTALL_OPENMODELICA=/opt/Dynawo_MacOS_latest/OpenModelica
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
       script:
-        - (cd /opt && curl -L $(curl -s -L -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4) -o Dynawo_MacOS_latest.zip)
-        - unzip /opt/Dynawo_MacOS_latest.zip -d /opt/Dynawo_MacOS_latest
-        - util/envDynawo.sh build-3rd-party-version
-        - util/envDynawo.sh build-dynawo
+        - ./build_stage.sh
     - stage: build
       os: osx
       osx_image: xcode10.3
       DYNAWO_COMPILER: clang++
-      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC DYNAWO_INSTALL_OPENMODELICA=/opt/Dynawo_MacOS_latest/OpenModelica
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
       script:
-        - (cd /opt && curl -L $(curl -s -L -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4) -o Dynawo_MacOS_latest.zip)
-        - unzip /opt/Dynawo_MacOS_latest.zip -d /opt/Dynawo_MacOS_latest
-        - util/envDynawo.sh build-3rd-party-version
-        - util/envDynawo.sh build-dynawo
+        - ./build_stage.sh
