@@ -9,4 +9,5 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   git clone --depth=1 https://github.com/dynawo/dynawo.git dynawo
   (cd dynawo; git log -1 --decorate)
+	./googletest.sh
 fi

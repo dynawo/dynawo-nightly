@@ -34,4 +34,6 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   export DYNAWO_RESULTS_SHOW="false"
   export DYNAWO_LIBARCHIVE_HOME=$HOME/Dynawo_MacOS_latest
   export DYNAWO_BOOST_HOME=$HOME/Dynawo_MacOS_latest
+	export DYNAWO_GTEST_HOME=$HOME/googletest
+	export DYNAWO_GMOCK_HOME=$DYNAWO_GTEST_HOME
 fi
