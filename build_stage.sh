@@ -5,7 +5,7 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   zip_file=$(curl -s -L -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4)
-  curl -L -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4
+  curl -v -s -L -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4
   echo zip_file $zip_file
   (cd /opt && curl -L $zip_file -o Dynawo_MacOS_latest.zip)
   unzip /opt/Dynawo_MacOS_latest.zip -d /opt/Dynawo_MacOS_latest
