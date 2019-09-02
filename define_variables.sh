@@ -21,15 +21,17 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   export GIT_COMMAND="git clone --depth=1 https://github.com/dynawo/dynawo.git dynawo"
   export LOG_COMMAND="cd dynawo;git log -1 --decorate"
   export COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh build-3rd-party-version;RETURN_CODE=\$?;if [ \${RETURN_CODE} -ne 0 ]; then exit \${RETURN_CODE}; fi;util/envDynawo.sh build-dynawo;")
-  echo $COMMAND
+  echo COMMAND $COMMAND
   export NRT_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh nrt;")
-  echo $NRT_COMMAND
+  echo NRT_COMMAND $NRT_COMMAND
   export BUILD_OMC_COMMAND=$(echo -n "cd dynawo;export DYNAWO_SRC_OPENMODELICA=$DYNAWO_SRC_OPENMODELICA_LOCAL; export DYNAWO_INSTALL_OPENMODELICA=$DYNAWO_INSTALL_OPENMODELICA_LOCAL; util/envDynawo.sh build-omcDynawo;")
-  echo $BUILD_OMC_COMMAND
+  echo BUILD_OMC_COMMAND $BUILD_OMC_COMMAND
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   export DYNAWO_HOME=$(pwd)/dynawo
   export DYNAWO_INSTALL_OPENMODELICA=/opt/Dynawo_MacOS_latest/OpenModelica
   export DYNAWO_SRC_OPENMODELICA=/opt/OpenModelica/Source
   export DYNAWO_NB_PROCESSORS_USED=$(sysctl hw | grep ncpu | awk '{print $(NF)}')
   export DYNAWO_RESULTS_SHOW="false"
+  export DYNAWO_LIBARCHIVE_HOME=/opt/Dynawo_MacOS_latest
+  export DYNAWO_BOOST_HOME=/opt/Dynawo_MacOS_latest
 fi
