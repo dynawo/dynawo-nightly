@@ -7,6 +7,8 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   (cd /opt && curl -L $(curl -s -L -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4) -o Dynawo_MacOS_latest.zip)
   unzip /opt/Dynawo_MacOS_latest.zip -d /opt/Dynawo_MacOS_latest
   cd dynawo
-  util/envDynawo.sh build-3rd-party-version
-  util/envDynawo.sh build-dynawo
+  ls /opt/Dynawo_MacOS_latest/lib
+  ls /opt/Dynawo_MacOS_latest/include
+  util/envDynawo.sh build-3rd-party-version || { echo "Error with build-3rd-party-version."; exit 1; }
+  util/envDynawo.sh build-dynawo || { echo "Error with build-dynawo."; exit 1; }
 fi
