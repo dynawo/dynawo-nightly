@@ -7,7 +7,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   zip_file=$(curl -s -L -H "Authorization: token $GITHUB_TOKEN" -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4)
   curl -s -L -H "Authorization: token $GITHUB_TOKEN" -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest
   echo zip_file $zip_file
-  (cd /opt && curl -L $zip_file -o Dynawo_MacOS_latest.zip)
+  (cd /opt && curl -L -H "Authorization: token $GITHUB_TOKEN" $zip_file -o Dynawo_MacOS_latest.zip)
   unzip /opt/Dynawo_MacOS_latest.zip -d /opt/Dynawo_MacOS_latest
   cd dynawo
   ls /opt/Dynawo_MacOS_latest/lib
