@@ -1,3 +1,5 @@
+#!/bin/bash
+export DYNAWO_RESULTS_SHOW="false"
 
 if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   export DYNAWO_HOME=/home/dynawo_travis/dynawo;
@@ -6,7 +8,6 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   export DYNAWO_INSTALL_OPENMODELICA_LOCAL=/home/dynawo_travis/dynawo/OpenModelica/Install
   export DYNAWO_SRC_OPENMODELICA_LOCAL=/home/dynawo_travis/dynawo/OpenModelica/Source
   export DYNAWO_NB_PROCESSORS_USED=$(grep -c \^processor /proc/cpuinfo)
-  export DYNAWO_RESULTS_SHOW="false"
   export DYNAWO_ADEPT_DOWNLOAD_URL=http://localhost:8080
   export DYNAWO_SUNDIALS_DOWNLOAD_URL=http://localhost:8080
   export DYNAWO_SUITE_SPARSE_DOWNLOAD_URL=http://localhost:8080
@@ -31,7 +32,6 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   export DYNAWO_INSTALL_OPENMODELICA=$HOME/Dynawo_MacOS_latest/OpenModelica
   export DYNAWO_SRC_OPENMODELICA=$DYNAWO_HOME/OpenModelica/Source
   export DYNAWO_NB_PROCESSORS_USED=$(sysctl hw | grep ncpu | awk '{print $(NF)}')
-  export DYNAWO_RESULTS_SHOW="false"
   export DYNAWO_LIBARCHIVE_HOME=$HOME/Dynawo_MacOS_latest
   export DYNAWO_BOOST_HOME=$HOME/Dynawo_MacOS_latest
 	export DYNAWO_GTEST_HOME=$HOME/googletest
