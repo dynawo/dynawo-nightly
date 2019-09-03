@@ -14,6 +14,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     util/envDynawo.sh jobs nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs || echo "Error"
     cat nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
     cat nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawoCompiler.log
+    util/envDynawo.sh jobs nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_DisconnectGroup/IEEE14.jobs || echo "Error"
     # util/envDynawo.sh nrt || { echo "Error with nrt."; exit 1; }
   fi
 fi
