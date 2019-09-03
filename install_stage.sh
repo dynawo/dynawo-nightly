@@ -13,4 +13,8 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   zip_url=$(curl -s -L -H "Authorization: token $GITHUB_TOKEN" -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4)
   curl -L $zip_url -o $HOME/Dynawo_MacOS_latest.zip
   unzip -q $HOME/Dynawo_MacOS_latest.zip -d $HOME/Dynawo_MacOS_latest
+  which pip
+  which pip2
+  which pip3
+  pip2 install lxml psutil
 fi
