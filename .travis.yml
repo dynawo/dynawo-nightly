@@ -170,7 +170,7 @@ jobs:
       os: osx
       osx_image: xcode10.3
       DYNAWO_COMPILER: clang++
-      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
         - ./build_stage.sh
     # - stage: build
