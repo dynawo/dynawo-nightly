@@ -6,5 +6,8 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   cd dynawo
   util/envDynawo.sh build-3rd-party-version || { echo "Error with build-3rd-party-version."; exit 1; }
-  util/envDynawo.sh build-dynawo || { echo "Error with build-dynawo."; exit 1; }
+  util/envDynawo.sh build-dynawo || echo
+  if [ "$DYNAWO_BUILD_TYPE" = "Release" -a "$DYNAWO_LIBRARY_TYPE" = "SHARED" ]; then
+    cat /Users/travis/build/dynawo/dynawo-nightly/dynawo/build/clang4.2.1/master/Release-cxx11/shared/dynawo/sources/Models/Modelica/PreassembledModels/UnderVoltageAutomaton.log
+  fi
 fi
