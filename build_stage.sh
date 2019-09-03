@@ -13,8 +13,10 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   if [ "$DYNAWO_BUILD_TYPE" = "Debug" ]; then
     util/envDynawo.sh jobs nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs || echo "Error"
     tail nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
-    tail nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawoCompiler.log
+    tail -50 nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawoCompiler.log
+    echo
     util/envDynawo.sh jobs nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_DisconnectGroup/IEEE14.jobs || echo "Error"
+    tail nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_DisconnectGroup/outputs/logs/dynawo.log
     # util/envDynawo.sh nrt || { echo "Error with nrt."; exit 1; }
   fi
 fi
