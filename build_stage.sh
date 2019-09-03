@@ -11,7 +11,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     util/envDynawo.sh build-tests || { echo "Error with build-tests."; exit 1; }
   fi
   if [ "$DYNAWO_BUILD_TYPE" = "Release" ]; then
-    util/envDynawo.sh jobs nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs
+    util/envDynawo.sh jobs nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs || echo "Error"
     cat nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
     cat nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawoCompiler.log
     # util/envDynawo.sh nrt || { echo "Error with nrt."; exit 1; }
