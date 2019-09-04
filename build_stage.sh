@@ -11,7 +11,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   #   util/envDynawo.sh build-tests || { echo "Error with build-tests."; exit 1; }
   # fi
   if [ "$DYNAWO_BUILD_TYPE" = "Debug" ]; then
-    sed -i'' 's#lldb#lldb -s ~/cmd.gdb#' /Users/travis/build/dynawo/dynawo-nightly/dynawo/install/clang4.2.1/master/Debug-cxx11/shared/dynawo/bin/launcher
+    sed -i '' 's|lldb|lldb -s ~/cmd.gdb|g' /Users/travis/build/dynawo/dynawo-nightly/dynawo/install/clang4.2.1/master/Debug-cxx11/shared/dynawo/bin/launcher
     echo "run" > ~/cmd.gdb
     echo "bt" >> ~/cmd.gdb
     echo "quit" >> ~/cmd.gdb
