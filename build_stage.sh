@@ -23,12 +23,16 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     sed -n -e '/(lldb) bt/,$p' ~/backtrace | grep frame | grep -o "at .*" | cut -d ' ' -f 2 | sed 's/:[0-9]*$//' > ~/breakpoints
     sed 's/^/b /g' ~/breakpoints > ~/breakpoints.gdb
     N=$(wc -l ~/breakpoints.gdb | awk '{print $1}')
-    echo "run" >> ~/breakpoints.gdb
-    for i in `seq 1 100`; do
+    for i in `seq 1 $N`; do
+      echo "breakpoint command add $i" >> ~/breakpoints.gdb
       echo "frame variable" >> ~/breakpoints.gdb
       echo "fr v" >> ~/breakpoints.gdb
-      echo "continue" >> ~/breakpoints.gdb
+      echo "process continue" >> ~/breakpoints.gdb
+      echo "DONE" >> ~/breakpoints.gdb
     done
+    echo "breakpoint list" >> ~/breakpoints.gdb
+    echo "run" >> ~/breakpoints.gdb
+    echo "continue" >> ~/breakpoints.gdb
     echo "quit" >> ~/breakpoints.gdb
     cat ~/breakpoints.gdb
     sed -i '' 's/cmd.gdb/breakpoints.gdb/' /Users/travis/build/dynawo/dynawo-nightly/dynawo/install/clang4.2.1/master/Debug-cxx11/shared/dynawo/bin/launcher
