@@ -18,6 +18,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     echo "fr v" >> ~/cmd.gdb
     echo "quit" >> ~/cmd.gdb
     util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs | tee ~/backtrace
+    ls nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/compilation
     sed -n -e '/(lldb) bt/,$p' ~/backtrace | grep frame | grep -o "at .*" | cut -d ' ' -f 2 | sed 's/:[0-9]*$//' > ~/breakpoints
     sed 's/^/b /g' ~/breakpoints > ~/breakpoints.gdb
     N=$(wc -l ~/breakpoints.gdb | awk '{print $1}')
