@@ -43,5 +43,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     echo
     $HOME/Dynawo_MacOS_latest/bin/execDynawo.sh jobs $HOME/Dynawo_MacOS_latest/sources/nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_DisconnectGroup/IEEE14.jobs || echo
     echo
+    $HOME/Dynawo_MacOS_latest/bin/execDynawo.sh jobs nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs || echo
+    echo
   fi
 fi
