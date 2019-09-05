@@ -43,8 +43,8 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
       echo "fr v" >> ~/breakpoints.gdb
       echo "continue" >> ~/breakpoints.gdb
       #echo "DONE" >> ~/breakpoints.gdb
-    #done
-    echo "breakpoint list" >> ~/breakpoints.gdb
+    done
+    #echo "breakpoint list" >> ~/breakpoints.gdb
     #echo "run" >> ~/breakpoints.gdb
     #echo "continue" >> ~/breakpoints.gdb
     echo "quit" >> ~/breakpoints.gdb
