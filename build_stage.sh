@@ -20,6 +20,9 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     echo "quit" >> ~/cmd.gdb
     util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs 2>&1 | tee ~/backtrace
     cat nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
+    util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs
+    cat nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
+    util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs > ~/backtrace
     util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_DisconnectGroup/IEEE14.jobs 2>&1 | tee ~/backtrace2
     util/envDynawo.sh dump-model nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/compilation/GEN____1_SM.dylib -o ~/dump.xml
     ls nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/compilation
@@ -27,25 +30,25 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     cat ~/backtrace
     sed -n -e '/(lldb) bt/,$p' ~/backtrace | grep frame | grep -o "at .*" | cut -d ' ' -f 2 | sed 's/:[0-9]*$//' > ~/breakpoints
     sed -i '' '/main.cpp/d' ~/breakpoints
-    echo "cat breakpoints"
-    cat ~/breakpoints
+    #echo "cat breakpoints"
+    #cat ~/breakpoints
     sed 's/^/b /g' ~/breakpoints > ~/breakpoints.gdb
-    echo "cat breakpoints.gdb"
-    cat ~/breakpoints.gdb
+    #echo "cat breakpoints.gdb"
+    #cat ~/breakpoints.gdb
     echo "run" >> ~/breakpoints.gdb
     N=$(wc -l ~/breakpoints.gdb | awk '{print $1}')
     for i in `seq 1 100`; do
       #echo "breakpoint command add $i" >> ~/breakpoints.gdb
       echo "frame variable" >> ~/breakpoints.gdb
       echo "fr v" >> ~/breakpoints.gdb
-      echo "process continue" >> ~/breakpoints.gdb
+      echo "continue" >> ~/breakpoints.gdb
       #echo "DONE" >> ~/breakpoints.gdb
-    done
+    #done
     echo "breakpoint list" >> ~/breakpoints.gdb
     #echo "run" >> ~/breakpoints.gdb
     #echo "continue" >> ~/breakpoints.gdb
     echo "quit" >> ~/breakpoints.gdb
-    cat ~/breakpoints.gdb
+    #cat ~/breakpoints.gdb
     sed -i '' 's/cmd.gdb/breakpoints.gdb/' /Users/travis/build/dynawo/dynawo-nightly/dynawo/install/clang4.2.1/master/Debug-cxx11/shared/dynawo/bin/launcher
     util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs
     # tail nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
