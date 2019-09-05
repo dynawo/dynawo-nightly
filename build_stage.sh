@@ -5,8 +5,10 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   cd dynawo
-  export DYNAWO_DEBUG_COMPILER_OPTION="-O0"
+  export DYNAWO_DEBUG_COMPILER_OPTION="-O1 -fsanitize=address -fno-omit-frame-pointer"
   util/envDynawo.sh build-3rd-party-version || { echo "Error with build-3rd-party-version."; exit 1; }
+  sed -i '' 's/$DYNAWO_DEBUG_COMPILER_OPTION/"$DYNAWO_DEBUG_COMPILER_OPTION"/' util/envDynawo.sh
+  export VERBOSE=1
   util/envDynawo.sh build-dynawo || { echo "Error with build-dynawo."; exit 1; }
   # if [ "$DYNAWO_BUILD_TYPE" = "Debug" ]; then
   #   util/envDynawo.sh build-tests || { echo "Error with build-tests."; exit 1; }
