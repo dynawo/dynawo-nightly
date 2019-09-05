@@ -17,8 +17,8 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     echo "frame variable" >> ~/cmd.gdb
     echo "fr v" >> ~/cmd.gdb
     echo "quit" >> ~/cmd.gdb
-    util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs | tee ~/backtrace
-    util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_DisconnectGroup/IEEE14.jobs | tee ~/backtrace2
+    util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs 2>&1 | tee ~/backtrace
+    util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_DisconnectGroup/IEEE14.jobs 2>&1 | tee ~/backtrace2
     ls nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/compilation
     echo "cat backtrace"
     cat ~/backtrace
