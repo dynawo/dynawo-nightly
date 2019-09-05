@@ -32,16 +32,17 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     sed 's/^/b /g' ~/breakpoints > ~/breakpoints.gdb
     echo "cat breakpoints.gdb"
     cat ~/breakpoints.gdb
+    echo "run" >> ~/breakpoints.gdb
     N=$(wc -l ~/breakpoints.gdb | awk '{print $1}')
-    for i in `seq 1 $N`; do
-      echo "breakpoint command add $i" >> ~/breakpoints.gdb
+    for i in `seq 1 100`; do
+      #echo "breakpoint command add $i" >> ~/breakpoints.gdb
       echo "frame variable" >> ~/breakpoints.gdb
       echo "fr v" >> ~/breakpoints.gdb
       echo "process continue" >> ~/breakpoints.gdb
-      echo "DONE" >> ~/breakpoints.gdb
+      #echo "DONE" >> ~/breakpoints.gdb
     done
     echo "breakpoint list" >> ~/breakpoints.gdb
-    echo "run" >> ~/breakpoints.gdb
+    #echo "run" >> ~/breakpoints.gdb
     #echo "continue" >> ~/breakpoints.gdb
     echo "quit" >> ~/breakpoints.gdb
     cat ~/breakpoints.gdb
