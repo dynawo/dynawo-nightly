@@ -19,7 +19,9 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     echo "fr v" >> ~/cmd.gdb
     echo "quit" >> ~/cmd.gdb
     util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs 2>&1 | tee ~/backtrace
+    cat nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
     util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_DisconnectGroup/IEEE14.jobs 2>&1 | tee ~/backtrace2
+    util/envDynawo.sh dump-model nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/compilation/GEN____1_SM.dylib -o ~/dump.xml
     ls nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/compilation
     echo "cat backtrace"
     cat ~/backtrace
@@ -40,7 +42,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     done
     echo "breakpoint list" >> ~/breakpoints.gdb
     echo "run" >> ~/breakpoints.gdb
-    echo "continue" >> ~/breakpoints.gdb
+    #echo "continue" >> ~/breakpoints.gdb
     echo "quit" >> ~/breakpoints.gdb
     cat ~/breakpoints.gdb
     sed -i '' 's/cmd.gdb/breakpoints.gdb/' /Users/travis/build/dynawo/dynawo-nightly/dynawo/install/clang4.2.1/master/Debug-cxx11/shared/dynawo/bin/launcher
