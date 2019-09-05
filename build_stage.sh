@@ -5,6 +5,7 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   cd dynawo
+  export DYNAWO_DEBUG_COMPILER_OPTION="-O0"
   util/envDynawo.sh build-3rd-party-version || { echo "Error with build-3rd-party-version."; exit 1; }
   util/envDynawo.sh build-dynawo || { echo "Error with build-dynawo."; exit 1; }
   # if [ "$DYNAWO_BUILD_TYPE" = "Debug" ]; then
@@ -23,6 +24,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     echo "cat backtrace"
     cat ~/backtrace
     sed -n -e '/(lldb) bt/,$p' ~/backtrace | grep frame | grep -o "at .*" | cut -d ' ' -f 2 | sed 's/:[0-9]*$//' > ~/breakpoints
+    sed -i '' '/main.cpp/d' ~/breakpoints
     echo "cat breakpoints"
     cat ~/breakpoints
     sed 's/^/b /g' ~/breakpoints > ~/breakpoints.gdb
