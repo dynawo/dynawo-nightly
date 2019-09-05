@@ -5,9 +5,11 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   cd dynawo
-  export DYNAWO_DEBUG_COMPILER_OPTION="-O1 -fsanitize=address -fno-omit-frame-pointer"
+  #export DYNAWO_DEBUG_COMPILER_OPTION="-O1 -fsanitize=address -fno-omit-frame-pointer"
   util/envDynawo.sh build-3rd-party-version || { echo "Error with build-3rd-party-version."; exit 1; }
+  sed -i '' 's/-O1/-O1 -fsanitize=address -fno-omit-frame-pointer/' util/envDynawo.sh
   sed -i '' 's/$DYNAWO_DEBUG_COMPILER_OPTION/"$DYNAWO_DEBUG_COMPILER_OPTION"/' util/envDynawo.sh
+  cat util/envDynawo.sh
   export VERBOSE=1
   util/envDynawo.sh build-dynawo || { echo "Error with build-dynawo."; exit 1; }
   # if [ "$DYNAWO_BUILD_TYPE" = "Debug" ]; then
@@ -27,7 +29,8 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs > ~/backtrace
     util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_DisconnectGroup/IEEE14.jobs 2>&1 | tee ~/backtrace2
     util/envDynawo.sh dump-model nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/compilation/GEN____1_SM.dylib -o ~/dump.xml
-    ls nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/compilation
+    cat ~/dump.xml
+    #ls nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/compilation
     echo "cat backtrace"
     cat ~/backtrace
     sed -n -e '/(lldb) bt/,$p' ~/backtrace | grep frame | grep -o "at .*" | cut -d ' ' -f 2 | sed 's/:[0-9]*$//' > ~/breakpoints
