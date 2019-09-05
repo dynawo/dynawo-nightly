@@ -24,7 +24,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     cat ~/backtrace
     sed -n -e '/(lldb) bt/,$p' ~/backtrace | grep frame | grep -o "at .*" | cut -d ' ' -f 2 | sed 's/:[0-9]*$//' > ~/breakpoints
     echo "cat breakpoints"
-    cat > ~/breakpoints
+    cat ~/breakpoints
     sed 's/^/b /g' ~/breakpoints > ~/breakpoints.gdb
     echo "cat breakpoints.gdb"
     cat ~/breakpoints.gdb
