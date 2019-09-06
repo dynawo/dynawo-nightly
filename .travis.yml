@@ -25,9 +25,10 @@ notifications:
     on_failure: always
 
 install:
-  - travis_wait 60 mvn install
   - source define_variables.sh
   - ./install_stage.sh
+  - travis_wait 60 mvn install
+
 
 jobs:
   include:
