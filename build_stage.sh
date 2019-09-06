@@ -24,12 +24,20 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     #cat nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/outputs/logs/dynawo.log
     #util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/IEEE14.jobs
     #cat nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/outputs/logs/dynawo.log
+    echo "==============================================================="
+    echo "cat Models"
+    cat  build/clang4.2.1/master/Debug-cxx11/shared/dynawo/sources/Models/Modelica/PreassembledModels/GeneratorSynchronousFourWindingsProportionalRegulations.h
+    cat  build/clang4.2.1/master/Debug-cxx11/shared/dynawo/sources/Models/Modelica/PreassembledModels/GeneratorSynchronousFourWindingsProportionalRegulations.cpp
+    cat  build/clang4.2.1/master/Debug-cxx11/shared/dynawo/sources/Models/Modelica/PreassembledModels/GeneratorSynchronousFourWindingsProportionalRegulations_Init.h
+    cat  build/clang4.2.1/master/Debug-cxx11/shared/dynawo/sources/Models/Modelica/PreassembledModels/GeneratorSynchronousFourWindingsProportionalRegulations_Dyn.h
+    echo "==============================================================="
+
     util/envDynawo.sh jobs nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/IEEE14.jobs
     echo "==============================================================="
     echo "ENV"
     env
     echo "==============================================================="
-    util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/IEEE14.jobs > ~/backtrace
+    util/envDynawo.sh jobs-valgrind nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/IEEE14.jobs > ~/backtrace
     echo "==============================================================="
     echo "cat dynawo.log"
     cat nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/outputs/logs/dynawo.log
