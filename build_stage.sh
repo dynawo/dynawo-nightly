@@ -9,8 +9,6 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   util/envDynawo.sh build-3rd-party-version || { echo "Error with build-3rd-party-version."; exit 1; }
   sed -i '' 's/-O1/-O1 -fsanitize=address -fno-omit-frame-pointer/' util/envDynawo.sh
   sed -i '' 's/$DYNAWO_DEBUG_COMPILER_OPTION/"$DYNAWO_DEBUG_COMPILER_OPTION"/' util/envDynawo.sh
-  cat util/envDynawo.sh
-  export VERBOSE=1
   util/envDynawo.sh build-dynawo || { echo "Error with build-dynawo."; exit 1; }
   # if [ "$DYNAWO_BUILD_TYPE" = "Debug" ]; then
   #   util/envDynawo.sh build-tests || { echo "Error with build-tests."; exit 1; }
@@ -26,6 +24,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     #cat nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
     #util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs
     #cat nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
+    util/envDynawo.sh jobs nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs
     echo "==============================================================="
     echo "ENV"
     env
@@ -73,6 +72,10 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     #cat ~/breakpoints.gdb
     sed -i '' 's/cmd.gdb/breakpoints.gdb/' /Users/travis/build/dynawo/dynawo-nightly/dynawo/install/clang4.2.1/master/Debug-cxx11/shared/dynawo/bin/launcher
     util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/IEEE14.jobs
+    echo "==============================================================="
+    echo "cat dynawo.log"
+    cat nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
+    echo "==============================================================="
     # tail nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawo.log
     # tail -50 nrt/data/IEEE14/IEEE14_SyntaxExamples/IEEE14_ModelicaModel/outputs/logs/dynawoCompiler.log
     # echo
