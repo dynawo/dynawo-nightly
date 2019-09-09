@@ -37,7 +37,8 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
     echo "ENV"
     env
     echo "==============================================================="
-    util/envDynawo.sh jobs-valgrind nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/IEEE14.jobs > ~/backtrace
+    travis_wait util/envDynawo.sh jobs-valgrind nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/IEEE14.jobs
+    util/envDynawo.sh jobs-gdb nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/IEEE14.jobs > ~/backtrace
     echo "==============================================================="
     echo "cat dynawo.log"
     cat nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/outputs/logs/dynawo.log
