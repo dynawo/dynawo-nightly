@@ -31,7 +31,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   fi
   pushd $SCRIPT_DIR/build/$BOOST_DIRECTORY
   ./bootstrap.sh --prefix=/Users/travis/boost cxxstd=11 --with-toolset=clang --with-libraries=filesystem,program_options,serialization,system,log,iostreams,atomic || { echo "Error while boost bootstrap."; exit 1; }
-  ./b2 -d2 --build-dir=$SCRIPT_DIR/build-boost cxxflags="-std=c++11" toolset=clang variant=debug install || { echo "Error while boost b2."; exit 1; }
+  ./b2 --build-dir=$SCRIPT_DIR/build-boost cxxflags="-std=c++11" toolset=clang variant=debug install || { echo "Error while boost b2."; exit 1; }
   for file in `find /Users/travis/boost/lib -name "libboost*.dylib"`; do
     install_name_tool -add_rpath $install_path/lib $file 2> /dev/null || echo -n
   done
