@@ -173,7 +173,8 @@ jobs:
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
       script:
         - ./build_stage.sh
-        - travis_wait util/envDynawo.sh jobs-valgrind nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/IEEE14.jobs
+        - dynawo/util/envDynawo.sh jobs nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/IEEE14.jobs
+        - travis_wait dynawo/util/envDynawo.sh jobs-valgrind nrt/data/IEEE14/IEEE14_BasicTestCases/IEEE14_LoadVariation/IEEE14.jobs
     # - stage: build
     #   os: osx
     #   osx_image: xcode10.3
