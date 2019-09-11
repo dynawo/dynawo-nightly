@@ -10,6 +10,9 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   sed -i '' 's/-O1/-O1 -fsanitize=address -fno-omit-frame-pointer/' util/envDynawo.sh
   sed -i '' 's/$DYNAWO_DEBUG_COMPILER_OPTION/"$DYNAWO_DEBUG_COMPILER_OPTION"/' util/envDynawo.sh
   util/envDynawo.sh build-dynawo || { echo "Error with build-dynawo."; exit 1; }
+  for job in $(find nrt/data -name "*.jobs"); do
+    util/envDynawo.sh jobs $job || { echo "Error with job $job."; exit 1; }
+  done
   # if [ "$DYNAWO_BUILD_TYPE" = "Debug" ]; then
   #   util/envDynawo.sh build-tests || { echo "Error with build-tests."; exit 1; }
   # fi
