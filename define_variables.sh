@@ -33,7 +33,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   export DYNAWO_SRC_OPENMODELICA=$DYNAWO_HOME/OpenModelica/Source
   export DYNAWO_NB_PROCESSORS_USED=$(sysctl hw | grep ncpu | awk '{print $(NF)}')
   export DYNAWO_LIBARCHIVE_HOME=$HOME/Dynawo_MacOS_latest
-  export DYNAWO_BOOST_HOME=/Users/travis/boost
+  export DYNAWO_BOOST_HOME=$HOME/Dynawo_MacOS_latest
 	export DYNAWO_GTEST_HOME=$HOME/googletest
 	export DYNAWO_GMOCK_HOME=$DYNAWO_GTEST_HOME
 fi
