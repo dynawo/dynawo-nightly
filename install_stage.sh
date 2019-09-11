@@ -14,7 +14,7 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   curl -L $zip_url -o $HOME/Dynawo_MacOS_latest.zip
   unzip -q $HOME/Dynawo_MacOS_latest.zip -d $HOME/Dynawo_MacOS_latest
   pip install lxml psutil
-  brew install --HEAD https://raw.githubusercontent.com/sowson/valgrind/master/valgrind.rb
+  #brew install --HEAD https://raw.githubusercontent.com/sowson/valgrind/master/valgrind.rb
   BOOST_VERSION=1_69_0
   BOOST_ARCHIVE=boost_${BOOST_VERSION}.tar.gz
   BOOST_DIRECTORY=boost_$BOOST_VERSION
