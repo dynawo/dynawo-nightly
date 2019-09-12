@@ -166,13 +166,13 @@ jobs:
     #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED
     #   script:
     #     - docker exec $dynawo_env $dynawo_om_env_local $dynawo_env_url dynawo_travis_container bash -c "$BUILD_OMC_COMMAND"
-    # - stage: build
-    #   os: osx
-    #   osx_image: xcode10.3
-    #   DYNAWO_COMPILER: clang++
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
-    #   script:
-    #     - ./build_stage.sh
+    - stage: build
+      os: osx
+      osx_image: xcode10.3
+      DYNAWO_COMPILER: clang++
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
+      script:
+        - ./build_stage.sh
     - stage: build
       os: osx
       osx_image: xcode10.3
