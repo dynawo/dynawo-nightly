@@ -3,6 +3,9 @@
 if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$COMMAND"
   docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$NRT_COMMAND"
+  if [ "$DYNAWO_BUILD_TYPE" = "Debug" ]; then
+    docker exec $dynawo_env $dynawo_om_env $dynawo_env_url dynawo_travis_container bash -c "$TESTS_COMMAND"
+  fi
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   cd dynawo
   util/envDynawo.sh build-3rd-party-version || { echo "Error with build-3rd-party-version."; exit 1; }

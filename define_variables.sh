@@ -27,6 +27,8 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   echo NRT_COMMAND $NRT_COMMAND
   export BUILD_OMC_COMMAND=$(echo -n "cd dynawo;export DYNAWO_SRC_OPENMODELICA=$DYNAWO_SRC_OPENMODELICA_LOCAL; export DYNAWO_INSTALL_OPENMODELICA=$DYNAWO_INSTALL_OPENMODELICA_LOCAL; util/envDynawo.sh build-omcDynawo;")
   echo BUILD_OMC_COMMAND $BUILD_OMC_COMMAND
+  export TESTS_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh build-tests;")
+  echo TESTS_COMMAND $TESTS_COMMAND
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   export DYNAWO_HOME=$(pwd)/dynawo
   export DYNAWO_INSTALL_OPENMODELICA=$HOME/Dynawo_MacOS_latest/OpenModelica
@@ -34,6 +36,6 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   export DYNAWO_NB_PROCESSORS_USED=$(sysctl hw | grep ncpu | awk '{print $(NF)}')
   export DYNAWO_LIBARCHIVE_HOME=$HOME/Dynawo_MacOS_latest
   export DYNAWO_BOOST_HOME=$HOME/Dynawo_MacOS_latest
-	export DYNAWO_GTEST_HOME=$HOME/googletest
-	export DYNAWO_GMOCK_HOME=$DYNAWO_GTEST_HOME
+  export DYNAWO_GTEST_HOME=$HOME/googletest
+  export DYNAWO_GMOCK_HOME=$DYNAWO_GTEST_HOME
 fi
