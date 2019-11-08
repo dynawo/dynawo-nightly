@@ -8,7 +8,7 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   fi
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   cd dynawo
-  util/envDynawo.sh build-3rd-party-version || { echo "Error with build-3rd-party-version."; exit 1; }
+  util/envDynawo.sh build-3rd-party || { echo "Error with build-3rd-party."; exit 1; }
   util/envDynawo.sh build-dynawo || { echo "Error with build-dynawo."; exit 1; }
   if [ "$DYNAWO_BUILD_TYPE" = "Release" ]; then
     for job in $(find nrt/data -name "*.jobs"); do

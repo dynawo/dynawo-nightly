@@ -21,7 +21,7 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   export dynawo_env_url=$(echo -n "-e DYNAWO_ADEPT_DOWNLOAD_URL -e DYNAWO_SUNDIALS_DOWNLOAD_URL -e DYNAWO_SUITE_SPARSE_DOWNLOAD_URL -e DYNAWO_JQUERY_DOWNLOAD_URL -e DYNAWO_FLOT_DOWNLOAD_URL -e DYNAWO_CPPLINT_DOWNLOAD_URL -e DYNAWO_XERCESC_DOWNLOAD_URL")
   export GIT_COMMAND="git clone --depth=1 https://github.com/dynawo/dynawo.git dynawo"
   export LOG_COMMAND="cd dynawo;git log -1 --decorate"
-  export COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh build-3rd-party-version;RETURN_CODE=\$?;if [ \${RETURN_CODE} -ne 0 ]; then exit \${RETURN_CODE}; fi;util/envDynawo.sh build-dynawo;")
+  export COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh build-3rd-party;RETURN_CODE=\$?;if [ \${RETURN_CODE} -ne 0 ]; then exit \${RETURN_CODE}; fi;util/envDynawo.sh build-dynawo;")
   echo COMMAND $COMMAND
   export NRT_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh nrt;")
   echo NRT_COMMAND $NRT_COMMAND
@@ -34,8 +34,8 @@ elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   export DYNAWO_INSTALL_OPENMODELICA=$HOME/Dynawo_MacOS_latest/OpenModelica
   export DYNAWO_SRC_OPENMODELICA=$DYNAWO_HOME/OpenModelica/Source
   export DYNAWO_NB_PROCESSORS_USED=$(sysctl hw | grep ncpu | awk '{print $(NF)}')
-  export DYNAWO_LIBARCHIVE_HOME=$HOME/Dynawo_MacOS_latest
-  export DYNAWO_BOOST_HOME=$HOME/Dynawo_MacOS_latest
-  export DYNAWO_GTEST_HOME=$HOME/googletest
-  export DYNAWO_GMOCK_HOME=$DYNAWO_GTEST_HOME
+  #export DYNAWO_LIBARCHIVE_HOME=$HOME/Dynawo_MacOS_latest
+  #export DYNAWO_BOOST_HOME=$HOME/Dynawo_MacOS_latest
+  #export DYNAWO_GTEST_HOME=$HOME/googletest
+  #export DYNAWO_GMOCK_HOME=$DYNAWO_GTEST_HOME
 fi

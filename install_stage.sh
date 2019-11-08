@@ -9,9 +9,6 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
 elif [ "$TRAVIS_OS_NAME" = "osx" ]; then
   git clone --depth=1 https://github.com/dynawo/dynawo.git dynawo
   (cd dynawo; git log -1 --decorate)
-  if [ "$DYNAWO_BUILD_TYPE" = "Debug" ]; then
-    ./googletest.sh || { echo "Error with googletest install."; exit 1; }
-  fi
   zip_url=$(curl -s -L -H "Authorization: token $GITHUB_TOKEN" -X GET https://api.github.com/repos/dynawo/dynawo/releases/latest | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4)
   curl -L $zip_url -o $HOME/Dynawo_MacOS_latest.zip
   unzip -q $HOME/Dynawo_MacOS_latest.zip -d $HOME/Dynawo_MacOS_latest
