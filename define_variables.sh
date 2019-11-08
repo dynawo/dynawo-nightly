@@ -25,7 +25,7 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   echo COMMAND $COMMAND
   export NRT_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh nrt;")
   echo NRT_COMMAND $NRT_COMMAND
-  export BUILD_OMC_COMMAND=$(echo -n "cd dynawo;export DYNAWO_SRC_OPENMODELICA=$DYNAWO_SRC_OPENMODELICA_LOCAL; export DYNAWO_INSTALL_OPENMODELICA=$DYNAWO_INSTALL_OPENMODELICA_LOCAL; util/envDynawo.sh build-omcDynawo;")
+  export BUILD_OMC_COMMAND=$(echo -n "cd dynawo;export DYNAWO_SRC_OPENMODELICA=$DYNAWO_SRC_OPENMODELICA_LOCAL; export DYNAWO_INSTALL_OPENMODELICA=$DYNAWO_INSTALL_OPENMODELICA_LOCAL; util/envDynawo.sh build-3rd-party;")
   echo BUILD_OMC_COMMAND $BUILD_OMC_COMMAND
   export TESTS_COMMAND=$(echo -n "cd dynawo;util/envDynawo.sh build-tests;")
   echo TESTS_COMMAND $TESTS_COMMAND
