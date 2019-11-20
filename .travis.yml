@@ -52,7 +52,7 @@ jobs:
       sudo: required
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
       script:
-        - ./build_stage.sh
+        - ./build_stage_fedora.sh
     - stage: build
       os: linux
       dist: trusty
@@ -82,7 +82,7 @@ jobs:
       sudo: required
       env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
       script:
-        - ./build_stage.sh
+        - ./build_stage_fedora.sh
     - stage: build
       os: linux
       dist: trusty
