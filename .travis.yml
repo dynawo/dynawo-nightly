@@ -51,6 +51,9 @@ jobs:
       services: docker
       sudo: required
       env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
       script:
         - ./build_stage_fedora.sh
     - stage: build
