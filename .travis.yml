@@ -227,30 +227,30 @@ jobs:
         - ./install_stage_macos.sh
       script:
         - ./build_stage_macos.sh
-    - stage: build
-      os: osx
-      osx_image: xcode10.3
-      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
-      install:
-        - source define_variables_macos.sh
-        - ./install_stage_macos.sh
-      script:
-        - ./build_stage_macos.sh
-    - stage: build
-      os: osx
-      osx_image: xcode10.3
-      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
-      install:
-        - source define_variables_macos.sh
-        - ./install_stage_macos.sh
-      script:
-        - ./build_stage_macos.sh
-    - stage: build
-      os: osx
-      osx_image: xcode10.3
-      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
-      install:
-        - source define_variables_macos.sh
-        - ./install_stage_macos.sh
-      script:
-        - ./build_stage_macos.sh
+    # - stage: build
+    #   os: osx
+    #   osx_image: xcode10.3
+    #   env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED
+    #   install:
+    #     - source define_variables_macos.sh
+    #     - ./install_stage_macos.sh
+    #   script:
+    #     - ./build_stage_macos.sh
+    # - stage: build
+    #   os: osx
+    #   osx_image: xcode10.3
+    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
+    #   install:
+    #     - source define_variables_macos.sh
+    #     - ./install_stage_macos.sh
+    #   script:
+    #     - ./build_stage_macos.sh
+    # - stage: build
+    #   os: osx
+    #   osx_image: xcode10.3
+    #   env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC
+    #   install:
+    #     - source define_variables_macos.sh
+    #     - ./install_stage_macos.sh
+    #   script:
+    #     - ./build_stage_macos.sh
