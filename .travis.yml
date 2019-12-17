@@ -23,201 +23,201 @@ notifications:
 
 jobs:
   include:
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - ./build_stage_fedora.sh
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
-    #   install:
-    #     - source define_variables_fedora.sh
-    #     - ./install_stage_fedora.sh
-    #   script:
-    #     - docker exec $dynawo_env $dynawo_om_env_local $dynawo_env_url dynawo_travis_container bash -c "$BUILD_OMC_COMMAND"
-    # - stage: build
-    #   os: linux
-    #   dist: trusty
-    #   services: docker
-    #   sudo: required
-    #   env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=bionic
-    #   install:
-    #     - source define_variables_bionic.sh
-    #     - ./install_stage_bionic.sh
-    #   script:
-    #     - ./build_stage_bionic.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=NO DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Debug DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=CLANG DYNAWO_LIBRARY_TYPE=STATIC DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - ./build_stage_fedora.sh
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=fedora
+      install:
+        - source define_variables_fedora.sh
+        - ./install_stage_fedora.sh
+      script:
+        - docker exec $dynawo_env $dynawo_om_env_local $dynawo_env_url dynawo_travis_container bash -c "$BUILD_OMC_COMMAND"
+    - stage: build
+      os: linux
+      dist: trusty
+      services: docker
+      sudo: required
+      env: DYNAWO_BUILD_TYPE=Release DYNAWO_CXX11_ENABLED=YES DYNAWO_COMPILER=GCC DYNAWO_LIBRARY_TYPE=SHARED DISTRIBUTION=bionic
+      install:
+        - source define_variables_bionic.sh
+        - ./install_stage_bionic.sh
+      script:
+        - ./build_stage_bionic.sh
     - stage: build
       os: osx
       osx_image: xcode10.3
