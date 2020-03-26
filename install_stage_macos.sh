@@ -3,7 +3,7 @@
 git clone --depth=1 https://github.com/dynawo/dynawo.git dynawo
 (cd dynawo; git log -1 --decorate)
 zip_url=$(curl -s -L -H "Authorization: token $GITHUB_TOKEN" -X GET https://api.github.com/repos/dynawo/dynawo/releases/19035139 | grep "Dynawo_MacOS" | grep url | cut -d '"' -f 4)
-if [ -z "$zip_url" ]; then
+if [ ! -z "$zip_url" ]; then
   curl -L $zip_url -o $HOME/Dynawo_MacOS_latest.zip
 else
   echo "Download url for zip is not good."
