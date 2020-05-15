@@ -20,3 +20,5 @@ fi
 # (cd $HOME/Dynawo_MacOS_latest/lib;rm -f libdynawo* libiidm* libsundials* libxerces-c* libzip* libklu* libamd* libcolamd* libbtf* libXML* libadept* libz* libsuitesparseconfig*)
 pip install lxml psutil
 rm -rf /usr/local/lib/cmake/Boost-* # delete boost config to avoid cmake finding it
+rm -rf /usr/local/lib/cmake/boost_*
+rm -rf /usr/local/lib/cmake/XercesC # idem xerces
