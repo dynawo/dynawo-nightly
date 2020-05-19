@@ -16,7 +16,7 @@ language: cpp
 notifications:
   email:
     recipients:
-      - gautier.bureau@rte-france.com
+      - gautier.bureau@gmail.com
       - florentine.rosiere@rte-france.com
     on_success: never
     on_failure: always
@@ -226,6 +226,9 @@ jobs:
         - source define_variables_macos.sh
         - ./install_stage_macos.sh
       script:
+        - cd dynawo
+        - util/envDynawo.sh build-3rd-party
+        - travis_wait 30 util/envDynawo.sh build-dynawo
         - ./build_stage_macos.sh
     # - stage: build
     #   os: osx
