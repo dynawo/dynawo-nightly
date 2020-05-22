@@ -228,7 +228,7 @@ jobs:
       script:
         - cd dynawo
         - util/envDynawo.sh build-3rd-party
-        - travis_wait 90 util/envDynawo.sh build-dynawo
+        - travis_wait 60 util/envDynawo.sh build-dynawo
         - ./build_stage_macos.sh
     # - stage: build
     #   os: osx
