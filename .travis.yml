@@ -16,7 +16,7 @@ language: cpp
 notifications:
   email:
     recipients:
-      - gautier.bureau@gmail.com
+      - gautier.bureau@rte-france.com
       - florentine.rosiere@rte-france.com
     on_success: never
     on_failure: always
